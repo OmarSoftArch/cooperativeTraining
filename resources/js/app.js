@@ -82,5 +82,33 @@ function initializeTrainingChat() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', initializeTrainingChat);
-document.addEventListener('livewire:navigated', initializeTrainingChat);
+function initializeTrainingDates() {
+    document.querySelectorAll('[data-training-date]').forEach((input) => {
+        if (input.dataset.dateReady || typeof input.showPicker !== 'function') return;
+        input.dataset.dateReady = 'true';
+
+        function openCalendar() {
+            try {
+                input.showPicker();
+            } catch {
+                // Keep the native date input usable if the browser blocks the picker.
+            }
+        }
+
+        input.addEventListener('click', openCalendar);
+        input.addEventListener('keydown', (event) => {
+            if (['Enter', ' ', 'ArrowDown', 'ArrowUp'].includes(event.key)) {
+                event.preventDefault();
+                openCalendar();
+            }
+        });
+    });
+}
+
+function initializeTrainingPage() {
+    initializeTrainingChat();
+    initializeTrainingDates();
+}
+
+document.addEventListener('DOMContentLoaded', initializeTrainingPage);
+document.addEventListener('livewire:navigated', initializeTrainingPage);

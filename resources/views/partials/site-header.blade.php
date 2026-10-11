@@ -7,14 +7,15 @@
         </a>
         <nav class="desktop-nav" aria-label="{{ __('site.main_navigation') }}">
             @auth
-                <a @class(['is-active' => request()->routeIs('health-centers.*')]) href="{{ route('health-centers.index') }}">{{ __('health-centers.title') }}</a>
                 @if (auth()->user()->role === 'admin')
+                    <a @class(['is-active' => request()->routeIs('health-centers.*')]) href="{{ route('health-centers.index') }}">{{ __('health-centers.title') }}</a>
                     <a @class(['is-active' => request()->routeIs('admin.training-applications.*')]) href="{{ route('admin.training-applications.index') }}">{{ __('Training applications') }}</a>
                 @else
                     <a @class(['is-active' => request()->routeIs('home')]) href="{{ route('home') }}#home">{{ __('site.home') }}</a>
                     <a href="{{ route('home') }}#about">{{ __('site.about_training') }}</a>
                     <a href="{{ route('home') }}#opportunities">{{ __('site.training_opportunities') }}</a>
                     <a href="{{ route('home') }}#journey">{{ __('site.trainee_journey') }}</a>
+                    <a @class(['is-active' => request()->routeIs('health-centers.*')]) href="{{ route('health-centers.index') }}">{{ __('health-centers.title') }}</a>
                     <a href="{{ route('home') }}#faq">{{ __('site.faq') }}</a>
                     <a @class(['is-active' => request()->routeIs('training.application*')]) href="{{ route('training.application') }}">{{ __('Training application') }}</a>
                 @endif
@@ -45,14 +46,15 @@
                 <summary aria-label="{{ __('site.open_navigation') }}"><span></span><span></span><span></span></summary>
                 <nav aria-label="{{ __('site.mobile_navigation') }}">
                     @auth
-                        <a @class(['is-active' => request()->routeIs('health-centers.*')]) href="{{ route('health-centers.index') }}">{{ __('health-centers.title') }}</a>
                         @if (auth()->user()->role === 'admin')
+                            <a @class(['is-active' => request()->routeIs('health-centers.*')]) href="{{ route('health-centers.index') }}">{{ __('health-centers.title') }}</a>
                             <a href="{{ route('admin.training-applications.index') }}">{{ __('Training applications') }}</a>
                         @else
                             <a href="{{ route('home') }}#home">{{ __('site.home') }}</a>
                             <a href="{{ route('home') }}#about">{{ __('site.about_training') }}</a>
                             <a href="{{ route('home') }}#opportunities">{{ __('site.training_opportunities') }}</a>
                             <a href="{{ route('home') }}#journey">{{ __('site.trainee_journey') }}</a>
+                            <a @class(['is-active' => request()->routeIs('health-centers.*')]) href="{{ route('health-centers.index') }}">{{ __('health-centers.title') }}</a>
                             <a href="{{ route('home') }}#faq">{{ __('site.faq') }}</a>
                             <a href="{{ route('training.application') }}">{{ __('Training application') }}</a>
                         @endif
