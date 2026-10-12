@@ -1,14 +1,4 @@
-FROM node:22-bookworm-slim AS frontend
-
-WORKDIR /app
-COPY package.json package-lock.json .npmrc ./
-RUN npm ci
-
-COPY . .
-RUN npm run build
-
-
-FROM php:8.4-apache-bookworm
+FROM php:8.4-apache-bookworm AS dependencies
 
 RUN apt-get update \
     && apt-get install -y \
@@ -24,7 +14,6 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 
 COPY . .
-COPY --from=frontend /app/public/build ./public/build
 
 RUN mkdir -p \
     storage/app/public \
@@ -40,6 +29,21 @@ RUN mkdir -p \
     --optimize-autoloader \
     --no-interaction \
     && composer check-platform-reqs --no-dev
+
+FROM node:22-bookworm-slim AS frontend
+
+WORKDIR /app
+COPY package.json package-lock.json .npmrc ./
+RUN npm ci
+
+COPY . .
+COPY --from=dependencies /var/www/html/vendor ./vendor
+RUN npm run build
+
+FROM dependencies AS runtime
+
+WORKDIR /var/www/html
+COPY --from=frontend /app/public/build ./public/build
 
 RUN sed -i \
     's!/var/www/html!/var/www/html/public!g' \
