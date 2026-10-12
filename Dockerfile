@@ -1,5 +1,10 @@
 FROM php:8.4-apache-bookworm AS dependencies
 
+RUN if ! getent group 1000 >/dev/null; then \
+        groupadd --gid 1000 render-secrets; \
+    fi \
+    && usermod --append --groups 1000 www-data
+
 RUN apt-get update \
     && apt-get install -y \
     git unzip libzip-dev libicu-dev \

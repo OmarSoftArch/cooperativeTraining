@@ -8,6 +8,7 @@ vendor
 !.env.example
 
 auth.json
+ca.pem
 
 public/build
 public/hot
