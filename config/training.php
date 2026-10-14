@@ -45,6 +45,7 @@ return [
         'maarefa' => ['ar' => 'جامعة المعرفة', 'en' => 'AlMaarefa University'],
         'future' => ['ar' => 'جامعة المستقبل', 'en' => 'University of the Future'],
         'arab_open' => ['ar' => 'الجامعة العربية المفتوحة - فرع السعودية', 'en' => 'Arab Open University - Saudi Arabia Branch'],
+        'tvtc' => ['ar' => 'المؤسسة العامة للتدريب التقني والمهني', 'en' => 'Technical and Vocational Training Corporation'],
     ],
     'degrees' => [
         'diploma' => ['ar' => 'دبلوم', 'en' => 'Diploma'],
